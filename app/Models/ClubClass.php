@@ -12,6 +12,7 @@ use \Venturecraft\Revisionable\RevisionableTrait;
 class ClubClass extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, RevisionableTrait;
+    use
 
     /**
      * The attributes that are mass assignable.
