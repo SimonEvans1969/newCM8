@@ -24,7 +24,8 @@ class ClubClass extends Component
      */
     public function render()
     {
-        $clubclass = ClubClass::find($this->class_id)
+        $clubclass = ClubClass::find($this->class_id);
+
         return view('components.self-booking.club-class',
             [
                 'clubclass' => $clubclass,
