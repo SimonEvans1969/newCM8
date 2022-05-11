@@ -19,7 +19,7 @@ class ClubClasses extends Controller
             ->leftjoin('classattributes', function($join) {
                 $join->on('clubclasses.id', '=', 'classattributes.clubclass_id');
                 $join->on('classattributes.attribute', '=', 'MembersOnly');
-            }
+            })
             ->get();
 
         return view('SelfBooking.index', [
