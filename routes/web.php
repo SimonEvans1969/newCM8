@@ -25,4 +25,4 @@ Route::get('/dashboard', function () {
 require __DIR__.'/auth.php';
 
 // Self-booking routes
-Route::get('/selfbooking', [ClubClasses::class, 'showClubClasses');
+Route::get('/selfbooking', [ClubClasses::class, 'showClubClasses']);
