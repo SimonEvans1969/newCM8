@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-public-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
 {{ __('Self-booking Classes') }}
@@ -6,6 +6,6 @@
 </x-slot>
 
 @foreach( $clubclasses as $clubclass )
-    <x-self-booking.club-class :class_id="{{ $clubclass->id }}"
+    <x-self-booking.class-panel :class_id="$clubclass->id" />
 @endforeach
-</x-app-layout>
+</x-public-layout>

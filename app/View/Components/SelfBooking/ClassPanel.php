@@ -5,7 +5,7 @@ namespace App\View\Components\SelfBooking;
 use Illuminate\View\Component;
 use App\Models\ClubClass;
 
-class ClubClass extends Component
+class ClassPanel extends Component
 {
     /**
      * Create a new component instance.

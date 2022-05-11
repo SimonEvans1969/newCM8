@@ -5,16 +5,21 @@ namespace App\Http\Controllers\SelfBooking;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\ClubClass;
-use
+
 class ClubClasses extends Controller
 {
     public function showClubClasses(){
         $clubclasses =
             ClubClass::where('status','LIVE')
-            ->whereIn('id',function($query){
-                $query->select('clubclass_id')->from('classattributes');
+            ->whereIn('clubclasses.id',function($query){
+                $query->select('clubclass_id')->from('classattributes')
+                      ->where('classattributes.attribute', '=', 'SelfBook')
+                      ->where('classattributes.value', '=', 'Y');
             })
-            ->join('classattributes', 'clubclasses.id', '=', 'classattributes.class_id')
+            ->leftjoin('classattributes', function($join) {
+                $join->on('clubclasses.id', '=', 'classattributes.clubclass_id');
+                $join->on('classattributes.attribute', '=', 'MembersOnly');
+            }
             ->get();
 
         return view('SelfBooking.index', [

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SelfBooking\ClubClasses;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,4 +25,4 @@ Route::get('/dashboard', function () {
 require __DIR__.'/auth.php';
 
 // Self-booking routes
-Route::get('/selfbooking, 'SelfBooking\ClubClasses@showClubClasses')->name('selfbooking');
+Route::get('/selfbooking', [ClubClasses::class, 'showClubClasses');
