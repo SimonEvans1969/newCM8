@@ -5,6 +5,7 @@ namespace App\View\Components\SelfBooking;
 use Illuminate\View\Component;
 use App\Models\ClubClass;
 use App\Models\ClassAttribute;
+use Illuminate\Support\Facades\Auth;
 
 class ClassPanel extends Component
 {
@@ -28,17 +29,22 @@ class ClassPanel extends Component
     {
         $clubclass = ClubClass::find($this->classId);
 
-        $class_attributes = new \stdClass();
-        $class_attributes_coll = ClassAttribute::where('clubclass_id','=',$this->classId)->get();
+        $membersOnly = ClassAttribute::where('clubclass_id','=',$this->classId)
+            ->where('attribute','=','MembersOnly')->first();
 
-        foreach( $class_attributes_coll as $class_attribute ) {
-            $class_attributes->{$class_attribute->attribute} = $class_attribute->value;
+        $bookable = new \stdClass();
+        if ((!$membersOnly) || ($membersOnly->value == 'N') || (Auth::check()) ) { // Add type later
+            $bookable->canBook = true;
+            $bookable->message = null;
+        } else {
+            $bookable->canBook = false;
+            $bookable->message = "Members Only Class";
         }
 
         return view('components.self-booking.class-panel',
             [
                 'clubclass' => $clubclass,
-                'classAttributes' => $class_attributes,
+                'bookable' => $bookable,
             ]);
     }
 }

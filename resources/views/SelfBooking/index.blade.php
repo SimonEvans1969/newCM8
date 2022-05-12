@@ -5,7 +5,9 @@
 </h2>
 </x-slot>
 
-@foreach( $clubclasses as $clubclass )
-    <x-self-booking.class-panel :class-id="$clubclass->id" />
-@endforeach
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 p-4">
+        @foreach( $clubclasses as $clubclass )
+            <x-self-booking.class-panel :class-id="$clubclass->id" />
+        @endforeach
+    </div>
 </x-public-layout>
