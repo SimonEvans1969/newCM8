@@ -8,14 +8,15 @@ use App\Models\ClassAttribute;
 
 class ClassPanel extends Component
 {
+    public $classId;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct( $class_id )
+    public function __construct( $classId )
     {
-        $this->class_id = $class_id;
+        $this->classId = $classId;
     }
 
     /**
@@ -25,17 +26,19 @@ class ClassPanel extends Component
      */
     public function render()
     {
-        $clubclass = ClubClass::find($this->class_id);
+        $clubclass = ClubClass::find($this->classId);
 
-        $attributes = new stdClass();
-        foreach( ClassAttribute::where('clubclass_id','=',$this->class_id) as $class_attribute ) {
-            $attributes->{$class_attribute->attribute} = $class_attribute->value;
+        $class_attributes = new \stdClass();
+        $class_attributes_coll = ClassAttribute::where('clubclass_id','=',$this->classId)->get();
+
+        foreach( $class_attributes_coll as $class_attribute ) {
+            $class_attributes->{$class_attribute->attribute} = $class_attribute->value;
         }
 
-        return view('components.self-booking.club-class',
+        return view('components.self-booking.class-panel',
             [
                 'clubclass' => $clubclass,
-                'attributes' => $attributes,
+                'classAttributes' => $class_attributes,
             ]);
     }
 }

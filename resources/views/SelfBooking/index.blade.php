@@ -6,6 +6,6 @@
 </x-slot>
 
 @foreach( $clubclasses as $clubclass )
-    <x-self-booking.class-panel :class_id="$clubclass->id" />
+    <x-self-booking.class-panel :class-id="$clubclass->id" />
 @endforeach
 </x-public-layout>
