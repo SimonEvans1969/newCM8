@@ -15,10 +15,7 @@ class ClubClasses extends Controller
                 $query->select('clubclass_id')->from('classattributes')
                       ->where('classattributes.attribute', '=', 'SelfBook')
                       ->where('classattributes.value', '=', 'Y');
-            })
-            ->leftjoin('classattributes', 'clubclasses.id', '=', 'classattributes.clubclass_id')
-                ->where('classattributes.attribute', '=', 'MembersOnly')
-                ->get();
+            })->get();
 
         return view('SelfBooking.index', [
             'clubclasses' => $clubclasses,
