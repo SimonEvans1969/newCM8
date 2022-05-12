@@ -4,6 +4,7 @@ namespace App\View\Components\SelfBooking;
 
 use Illuminate\View\Component;
 use App\Models\ClubClass;
+use App\Models\ClassAttribute;
 
 class ClassPanel extends Component
 {
@@ -26,9 +27,15 @@ class ClassPanel extends Component
     {
         $clubclass = ClubClass::find($this->class_id);
 
+        $attributes = new stdClass();
+        foreach( ClassAttribute::where('clubclass_id','=',$this->class_id) as $class_attribute ) {
+            $attributes->{$class_attribute->attribute} = $class_attribute->value;
+        }
+
         return view('components.self-booking.club-class',
             [
                 'clubclass' => $clubclass,
+                'attributes' => $attributes,
             ]);
     }
 }
